@@ -12,6 +12,7 @@
     "express": "^4.16.4",
     "mustache": "^3.0.0",
     "mustache-express": "^1.2.8",
+    "onoff": "^3.2.2",
     "ws": "^6.1.0"
   }
 }
