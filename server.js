@@ -60,3 +60,23 @@ app.listen(port, (err) => {
 	console.log('Le serveur écoute sur le port '+port+'\nRendez vous sur http://'+os.hostname()+'.local:'+port);
 	console.log('Tappez votre texte ici, il sera envoyé sur votre page web instantanément.');
 });
+
+const Gpio = require('onoff').Gpio;
+const led = new Gpio(18, 'out')
+const led2 = new Gpio(24, 'out')
+var sensor = new Gpio(17, 'in', 'both');
+
+sensor.watch(function (err, value) {
+	if(err) exit();
+	//Si le capteur détecte du mouvement 
+	//On affiche 'Mouvement détecté'
+	if(value == 1) {
+		sendText(' Mouvement détecté ! ');
+		led.writeSync(1);
+		led2.writeSync(0);
+	} else {
+		sendText('Fin du mouvement...');
+		led.writeSync(0);
+		led2.writeSync(1);
+	}
+});
